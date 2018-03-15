@@ -7,15 +7,25 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp',(err,Client)=>{
   
 //   queries ----------------------------
 //   Update Query
-  db.collection('Users').deleteMany({name:'Andrew Mead'}).then((result)=>{
-    console.log(JSON.stringify(result,undefined,2));
-  });
+//   db.collection('Users').deleteMany({name:'Andrew Mead'}).then((result)=>{
+//     console.log(JSON.stringify(result,undefined,2));
+//   });
 
-//   db.collection('Users').findOneAndDelete({
-//       _id:new ObjectID('5aa82b80d845392468dfdbfb')
-//     }).then((result)=>{
-//         console.log(JSON.stringify(result,undefined,2));
-//     })
+  //  
+  db.collection('Users').findOneAndUpdate({
+      _id:new ObjectID('5aa943deccc6430ef9ddb7f1')
+    },{
+        $set:{
+          name:'Frankstein'
+        },
+        $inc:{
+            age:1
+        }
+    },{
+        returnOriginal:false
+    }).then((result)=>{
+        console.log(JSON.stringify(result,undefined,2));
+    })
 // find query
 //   db.collection('Todos').find({name:'Andrew'})
 //   ---------------------------------------
