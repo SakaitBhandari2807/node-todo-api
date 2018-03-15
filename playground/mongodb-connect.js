@@ -5,18 +5,18 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp',(err,client)=>{
     if(err) return console.log('Unable to connect to Mongodb Server');
     console.log('Connected to Mongodb server');
     const db = client.db('TodoApp');
+    
     // db.collection('Todos').insertOne({
     //     text:'Working on Node',
     //     completed:false
     // },(err,result)=>{
     //      if(err) return console.log('Unable to insert todo',err);
-
     //      console.log(JSON.stringify(result.ops,undefined,2));
     // });
     // db.collection('Users').insertOne({
-    //   name:'Sakait Bhandari',
-    //   age:22,
-    //   location:'Noida'
+    //   name:'Andrew Mead',
+    //   age:29,
+    //   location:'US'
     // },(err,result)=>{
     //      if(err) return console.log(`Unable to connect ${err}`)
     //      console.log(JSON.stringify(result.ops,undefined,2));
@@ -34,25 +34,20 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp',(err,client)=>{
     // })
 
     // find  count of users inside User collection
-    // db.collection('Users').count().then((err,result)=>{
-    //   if(err) console.log(`Unable to connect`)
-    //   else console.log(JSON.stringify());
-    // })
+    db.collection('Users').find().toArray().then((docs)=>{
+      console.log(JSON.stringify(docs,undefined,2));
+    },(err)=>{
+        console.log('Unable to find ',err);
+    });
 
 
     // fetch function returns a cursor methods 
-    db.collection('Todos').find({completed:true}).toArray().then((docs)=>{
-       console.log('Todos');
-       console.log(JSON.stringify(docs,undefined,2));
-    },(err)=>{
-         console.log(`Unable to fetch Todos`,err);
-    })
-    // db.collection('Todos').insert({
-    //   text:'Learn Java',
-    //   completed:true
-    // },(err,result)=>{
-    //     if(err) return console.log('Unable to insert');
-    //     console.log(JSON.stringify(result.ops,undefined,2));
+    // db.collection('Todos').find().toArray().then((docs)=>{
+    //    console.log('Todos');
+    //    console.log(JSON.stringify(docs,undefined,2));
+    // },(err)=>{
+    //      console.log(`Unable to fetch Todos`,err);
     // })
+    
     client.close();
 });
