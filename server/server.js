@@ -10,6 +10,7 @@ var app = express();
 //Middleware
 app.use(bodyParser.json());
 
+// POST route
 app.post('/todos',(req,res)=>{
    var todo = new Todo({
        text:req.body.text
@@ -24,8 +25,10 @@ app.listen(3000,()=>{
     console.log(`Started on port 3000`);
 })
 
+// GET route
 app.get('/todos',(req,res)=>{
     Todo.find().then((todos)=>{
+        //console.log(JSON.stringify(todos,undefined,2));
        res.send({todos});
     },(err)=>{
         res.status(400).send(err);
