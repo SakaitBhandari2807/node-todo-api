@@ -1,15 +1,15 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const {ObjectID} = require('mongodb');
 
 var {mongoose} = require('./db/mongoose.js');
 var {Todo} = require('./models/todo.js');
-var {User} = require('./models/user.js')
+var {User} = require('./models/user.js');
+const middleware=require('../Middlewares');
 
 var app = express();
 
 //Middleware
-app.use(bodyParser.json());
+middleware.init(app);
 
 // POST route
 app.post('/todos',(req,res)=>{
